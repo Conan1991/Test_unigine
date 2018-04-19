@@ -24,7 +24,8 @@ public:
     worker(){};
     Q_SIGNAL void finished();
     Q_SLOT void do_work();
-    Q_SIGNAL void enable_object(int,bool);
-    Q_SLOT void do_enable_object(int,bool);
+    Q_SIGNAL void enable_object(int,int);
+    Q_SLOT void do_enable_object(int,int);
+    Q_SLOT void update_object();
 };
 

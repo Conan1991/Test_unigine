@@ -83,7 +83,7 @@ static const uint qt_meta_data_worker[] = {
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       4,   14, // methods
+       5,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
@@ -95,15 +95,17 @@ static const uint qt_meta_data_worker[] = {
       21,   19,    7,    7, 0x06,
 
  // slots: signature, parameters, type, tag, flags
-      45,    7,    7,    7, 0x0a,
-      55,   19,    7,    7, 0x0a,
+      44,    7,    7,    7, 0x0a,
+      54,   19,    7,    7, 0x0a,
+      80,    7,    7,    7, 0x0a,
 
        0        // eod
 };
 
 static const char qt_meta_stringdata_worker[] = {
-    "worker\0\0finished()\0,\0enable_object(int,bool)\0"
-    "do_work()\0do_enable_object(int,bool)\0"
+    "worker\0\0finished()\0,\0enable_object(int,int)\0"
+    "do_work()\0do_enable_object(int,int)\0"
+    "update_object()\0"
 };
 
 void worker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
@@ -113,9 +115,10 @@ void worker::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void
         worker *_t = static_cast<worker *>(_o);
         switch (_id) {
         case 0: _t->finished(); break;
-        case 1: _t->enable_object((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 1: _t->enable_object((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
         case 2: _t->do_work(); break;
-        case 3: _t->do_enable_object((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< bool(*)>(_a[2]))); break;
+        case 3: _t->do_enable_object((*reinterpret_cast< int(*)>(_a[1])),(*reinterpret_cast< int(*)>(_a[2]))); break;
+        case 4: _t->update_object(); break;
         default: ;
         }
     }
@@ -153,9 +156,9 @@ int worker::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
     if (_id < 0)
         return _id;
     if (_c == QMetaObject::InvokeMetaMethod) {
-        if (_id < 4)
+        if (_id < 5)
             qt_static_metacall(this, _c, _id, _a);
-        _id -= 4;
+        _id -= 5;
     }
     return _id;
 }
@@ -167,7 +170,7 @@ void worker::finished()
 }
 
 // SIGNAL 1
-void worker::enable_object(int _t1, bool _t2)
+void worker::enable_object(int _t1, int _t2)
 {
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);

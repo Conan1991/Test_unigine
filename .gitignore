@@ -8,3 +8,7 @@
 GeneratedFiles/
 Resources/
 x64/
+GeneratedFiles/Debug/moc_session.cpp
+*.tlog
+*.obj
+*.pdb
