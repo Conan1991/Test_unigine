@@ -6,8 +6,8 @@ QVector<Unigine::ObjectMeshDynamicPtr> Objects::objects;
 
 Objects::Objects(void)
 {
-    // create objects();
-	
+     create_objects();
+     objects[3]->getNode()->setEnabled(0);
 }
 
 void Objects::create_objects()
@@ -16,7 +16,6 @@ void Objects::create_objects()
 	objects.append(create_object(translate(UNIGINE_VEC3( 16.0f,  0.0f,0.0f))));
 	objects.append(create_object(translate(UNIGINE_VEC3(  0.0f,-16.0f,0.0f))));
 	objects.append(create_object(translate(UNIGINE_VEC3(  0.0f, 16.0f,0.0f))));
-    objects[3]->getNode()->setEnabled(0);
 }
 
 

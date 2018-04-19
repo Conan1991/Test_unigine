@@ -7,6 +7,7 @@
 #include "Objects.h"
 #include "session.h"
 #include "GLAppQt.h"
+#include <QtCore/QTimer>
 
 int main(int argc, char *argv[])
 {
@@ -35,10 +36,11 @@ int main(int argc, char *argv[])
     ///Thread *thread = new Thread();
     //thread->run();
 	// initialize App
-    new session();
+    session *sess =new session();
+    new Objects();
 	widget.init();
-	
-
+	QTimer::singleShot(10000, sess, SLOT(turn_on()));
+  
 	// main loop
 	app.exec();
 	// shutdown engine

@@ -12,9 +12,10 @@ class session : public QObject
 public:
     session(void);
     ~session(void);
+    Q_SLOT void turn_on();
 private:
     void AddThread();
-
+    
 };
 
 class worker: public QObject
@@ -29,3 +30,12 @@ public:
     Q_SLOT void update_object();
 };
 
+class Tthread: public QThread
+{
+    Q_OBJECT
+public:
+    Tthread(){};
+private:
+    void run();
+
+};
