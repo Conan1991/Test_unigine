@@ -1,4 +1,4 @@
-﻿Построение начато 19.04.2018 15:05:45.
+﻿Построение начато 20.04.2018 13:43:34.
      1>Проект "C:\Users\v.e.doronin\Documents\Myproject\Test_unigine\Test_unigine\Test_unigine.vcxproj" в узле 2 (целевые объекты build).
      1>InitializeBuildStatus:
          Создание "x64\Debug\Test_unigine.unsuccessfulbuild", так как было задано "AlwaysCreate".
@@ -33,4 +33,4 @@
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:01.26
+Затраченное время: 00:00:01.72

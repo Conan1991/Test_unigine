@@ -8,6 +8,7 @@ Objects::Objects(void)
 {
      create_objects();
      objects[3]->getNode()->setEnabled(0);
+     objects[2]->getNode()->setEnabled(0);
 }
 
 void Objects::create_objects()

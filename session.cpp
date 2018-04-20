@@ -6,9 +6,21 @@
 
 void do_enable_object(int numObj, int isEnabled)
 {
-    Objects::objects[numObj]->getNode()->setEnabled(isEnabled);
-    
     if (isEnabled == 1)
+    {
+        Objects::objects[numObj]->getNode()->release();
+        Objects::objects[numObj]->getNode()->setEnabled(1);
+        Objects::objects[numObj]->getNode()->grab();
+    }
+    else
+    {
+
+        Objects::objects[numObj]->getNode()->grab();
+        Objects::objects[numObj]->getNode()->setEnabled(0);
+        Objects::objects[numObj]->getNode()->release();
+        //Objects::objects[numObj]->getNode()->grab();
+    }
+    if ( Objects::objects[numObj]->getNode()->isEnabled() )
         qDebug() <<"obj"<< numObj << "is Enabled"<<endl;
     else 
         qDebug() <<"obj"<< numObj << "is Disabled"<<endl;
@@ -98,12 +110,12 @@ void Tthread::run()
         if( Objects::objects[0]->getNode()->isEnabled() == 1  )
         {
             do_enable_object(0, 0);
-            do_enable_object(2, 0);
+            //do_enable_object(2, 0);
         }
         else if ( Objects::objects[0]->getNode()->isEnabled() == 0  )
         {
             do_enable_object(0, 1);
-            do_enable_object(2, 1);
+            //do_enable_object(2, 1);
         }
         qDebug() << "Qthread working"<< endl; 
     }
