@@ -8,6 +8,17 @@
 #include "session.h"
 #include "GLAppQt.h"
 #include <QtCore/QTimer>
+#include <qt\qtconcurrentrun.h>
+#include "IApplication.h"
+
+using namespace QtConcurrent;
+
+void process(QString name)
+{
+    qDebug() << Objects::objects[1]->getNode()->isEnabled() << endl;
+    Objects::objects[1]->getNode()->setEnabled(1);
+    qDebug() << "Hello" << name << Objects::objects[1]->getNode()->isEnabled() << QThread::currentThread();
+}
 
 int main(int argc, char *argv[])
 {
@@ -32,19 +43,30 @@ int main(int argc, char *argv[])
 	
 	// initialize Engine
 	Unigine::Engine::init(UNIGINE_VERSION,&widget,argc,argv);
+
+    new Objects();
+    Objects::objects[2]->getNode()->setEnabled(0);
 	//new Objects();
-    ///Thread *thread = new Thread();
+    //Thread *thread = new Thread();
     //thread->run();
 	// initialize App
-    session *sess =new session();
-    new Objects();
+    session *sess = new session();
+    QTimer::singleShot(10000, sess, SLOT(turn_on()));
+    
+
+    QFuture<void> f1 = run(process, QString("trtr"));
+    f1.progressText();
 	widget.init();
-	QTimer::singleShot(10000, sess, SLOT(turn_on()));
+	
   
 	// main loop
 	app.exec();
+    
+    //thread->stop();
 	// shutdown engine
 	Unigine::Engine::shutdown();
 	
 	return 0;
 }
+
+

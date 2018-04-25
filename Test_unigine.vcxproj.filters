@@ -86,6 +86,15 @@
     <ClCompile Include="GeneratedFiles\Release\moc_session.cpp">
       <Filter>Generated Files\Release</Filter>
     </ClCompile>
+    <ClCompile Include="IApplication.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Debug\moc_IApplication.cpp">
+      <Filter>Generated Files\Debug</Filter>
+    </ClCompile>
+    <ClCompile Include="GeneratedFiles\Release\moc_IApplication.cpp">
+      <Filter>Generated Files\Release</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <CustomBuild Include="test_unigine.h">
@@ -107,6 +116,9 @@
       <Filter>Header Files</Filter>
     </CustomBuild>
     <CustomBuild Include="session.h">
+      <Filter>Header Files</Filter>
+    </CustomBuild>
+    <CustomBuild Include="IApplication.h">
       <Filter>Header Files</Filter>
     </CustomBuild>
   </ItemGroup>

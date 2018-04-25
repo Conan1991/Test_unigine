@@ -1,14 +1,24 @@
 #include "Objects.h"
 #include <UnigineGame.h>
+#include <QtCore/QTimer>
+#include <QtCore/qeventloop.h>
+#include <iostream>
+#include <algorithm>
+#include <iterator>
+#include <functional>
 
 #define M_PI       3.14159265358979323846
 QVector<Unigine::ObjectMeshDynamicPtr> Objects::objects;
 
+
 Objects::Objects(void)
 {
-     create_objects();
-     objects[3]->getNode()->setEnabled(0);
-     objects[2]->getNode()->setEnabled(0);
+    create_objects();
+    objects[1]->getNode()->setHandled(0);
+    objects[1]->getNode()->setLatest(1);
+     //objects[3]->getNode()->setEnabled(0);
+
+
 }
 
 void Objects::create_objects()
@@ -38,8 +48,24 @@ void Objects::update()
 
 void Thread::process()
 {
-    new Objects();
-    qDebug() << "fccdd" << getID();
+forever{
+    QEventLoop loop;
+    QTimer::singleShot(2000, &loop, SLOT(quit()));
+    loop.exec();
+    if (Objects::objects[1]->getNode()->isEnabled() )
+    {
+        Objects::objects[1]->getNode()->setEnabled(0);
+    }
+    else
+    {
+        Objects::objects[1]->getNode()->setEnabled(1);
+    }
+
+    if ( Objects::objects[1]->getNode()->isEnabled() )
+        qDebug() <<"obj"<< 1 << "is Enabled"<<endl;
+    else 
+        qDebug() <<"obj"<< 1 << "is Disabled"<<endl;
+}
 
 }
 
