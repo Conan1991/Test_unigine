@@ -14,9 +14,9 @@ QVector<Unigine::ObjectMeshDynamicPtr> Objects::objects;
 Objects::Objects(void)
 {
     create_objects();
-    objects[1]->getNode()->setHandled(0);
-    objects[1]->getNode()->setLatest(1);
-     //objects[3]->getNode()->setEnabled(0);
+    //objects[1]->getNode()->setHandled(0);
+    //objects[1]->getNode()->setLatest(1);
+    //objects[3]->getNode()->setEnabled(0);
 
 
 }

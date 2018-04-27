@@ -1,24 +1,24 @@
 #pragma once
 #include "c:\users\v.e.doronin\qt\x64\include\qtgui\qapplication.h"
+#include "Qt/qdebug.h"
 #include "session.h"
-#include "Qt/qlist.h"
-#include <UnigineObjectMeshDynamic.h>
 
-class IApplication :   public QApplication
+
+class IApplication : public QApplication
 {
 public:
-    QList<Unigine::ObjectMeshDynamicPtr> objects;
+    IApplication(int& argc, char ** argv) 
+        : QApplication(argc, argv)
+    {
+        /**/
+    }
 
+    ~IApplication()  { /***/ }
+    bool eventFilter(QObject*, QEvent*) override;
 
-    IApplication(void);
-    ~IApplication(void);
+    void init()
+    {
+        this->installEventFilter(this);
+    }
 };
 
-class Controller
-{
-    Q_OBJECT
-public:
-    Controller();
-    ~Controller();
-
-};

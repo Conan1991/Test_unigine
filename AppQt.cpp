@@ -51,8 +51,8 @@ AppQt::AppQt(QWidget *parent,Qt::WindowFlags flags) : QWidget(parent,flags) {
 	
 	setMouseTracking(true);
 	grabKeyboard();
-	
-	setTitle("AppQt");
+
+    AppQt::setTitle("AppQt");
 }
 
 AppQt::~AppQt() {
@@ -94,7 +94,7 @@ void AppQt::paintEvent(QPaintEvent *event) {
 	
 	// update widget
 	QWidget::update();
-	Objects::update();
+	//Objects::update();
 
 	// clear mouse axes
 	for(int i = 0; i < NUM_AXES; i++) {

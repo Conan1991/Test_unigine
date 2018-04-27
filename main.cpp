@@ -13,6 +13,7 @@
 
 using namespace QtConcurrent;
 
+
 void process(QString name)
 {
     qDebug() << Objects::objects[1]->getNode()->isEnabled() << endl;
@@ -23,16 +24,16 @@ void process(QString name)
 int main(int argc, char *argv[])
 {
     // initialize Qt
-	QApplication app(argc,argv);
+	IApplication app(argc,argv);
+   
 	QObject::connect(&app,SIGNAL(lastWindowClosed()),&app,SLOT(quit()));
-		
+    
 	// Main Window
 	QMainWindow window;
 	QAction quit("&Quit",&window);
 	window.menuBar()->addMenu("&File")->addAction(&quit);
 	QObject::connect(&quit,SIGNAL(triggered()),qApp,SLOT(quit()));
 	window.setWindowTitle("GLAppQt");
-	
 	// OpenGL App Qt
 	GLAppQt widget(&window);
 	QObject::connect(&widget,SIGNAL(closed()),qApp,SLOT(quit()));
@@ -43,19 +44,18 @@ int main(int argc, char *argv[])
 	
 	// initialize Engine
 	Unigine::Engine::init(UNIGINE_VERSION,&widget,argc,argv);
-
-    new Objects();
-    Objects::objects[2]->getNode()->setEnabled(0);
-	//new Objects();
+    app.init();
+    objectsController::instance();
+    //new Objects();
     //Thread *thread = new Thread();
     //thread->run();
 	// initialize App
     session *sess = new session();
-    QTimer::singleShot(10000, sess, SLOT(turn_on()));
+    //QTimer::singleShot(10000, sess, SLOT(turn_on()));
     
 
-    QFuture<void> f1 = run(process, QString("trtr"));
-    f1.progressText();
+    //QFuture<void> f1 = run(process, QString("trtr"));
+    //f1.progressText();
 	widget.init();
 	
   

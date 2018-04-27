@@ -1,12 +1,12 @@
-﻿Построение начато 23.04.2018 16:50:33.
+﻿Построение начато 27.04.2018 11:52:24.
      1>Проект "C:\Users\v.e.doronin\Documents\Myproject\Test_unigine\Test_unigine\Test_unigine.vcxproj" в узле 2 (целевые объекты build).
      1>InitializeBuildStatus:
          Создание "x64\Debug\Test_unigine.unsuccessfulbuild", так как было задано "AlwaysCreate".
        CustomBuild:
          Для всех выходных данных обновления не требуется.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /Ic:\Users\v.e.doronin\QT\x64\include /I.\GeneratedFiles\Debug /Ic:\Users\v.e.doronin\QT\x64\QtCore /Ic:\Users\v.e.doronin\QT\x64\include\QtGui /I"c:\Program Files\Microsoft SDKs\Windows\v7.0\Include\\" /Ic:\Users\v.e.doronin\Documents\Myproject\Visualizator_lib\librares\Unigine_07.07.14\include\ /Zi /nologo /W1 /WX- /Od /D UNICODE /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D UNIGINE_DOUBLE /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt main.cpp session.cpp
-         main.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /Ic:\Users\v.e.doronin\QT\x64\include /I.\GeneratedFiles\Debug /Ic:\Users\v.e.doronin\QT\x64\QtCore /Ic:\Users\v.e.doronin\QT\x64\include\QtGui /I"c:\Program Files\Microsoft SDKs\Windows\v7.0\Include\\" /Ic:\Users\v.e.doronin\Documents\Myproject\Visualizator_lib\librares\Unigine_07.07.14\include\ /Zi /nologo /W1 /WX- /Od /D UNICODE /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D UNIGINE_DOUBLE /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt IApplication.cpp session.cpp
+         IApplication.cpp
          session.cpp
          Generating Code...
          Для всех выходных данных обновления не требуется.
@@ -19,6 +19,7 @@
          x64\Debug\moc_test_unigine.obj
          x64\Debug\qrc_test_unigine.obj
          x64\Debug\GLAppQt.obj
+         x64\Debug\IApplication.obj
          x64\Debug\main.obj
          x64\Debug\Objects.obj
          x64\Debug\session.obj
@@ -35,4 +36,4 @@
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:02.00
+Затраченное время: 00:00:01.84

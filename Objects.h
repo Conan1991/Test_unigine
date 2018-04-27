@@ -11,9 +11,10 @@ class Objects
 {
 public:
     Objects(void);
-    static void create_objects();
+    
     ~Objects(void);
 
+    static void create_objects();
     static Unigine::ObjectMeshDynamicPtr create_object(const UNIGINE_MAT4 &transform);
     static void update_object(Unigine::ObjectMeshDynamicPtr object,float time);
 

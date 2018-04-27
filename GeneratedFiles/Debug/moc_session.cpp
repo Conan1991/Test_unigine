@@ -188,65 +188,80 @@ void worker::enable_object(int _t1, int _t2)
     void *_a[] = { 0, const_cast<void*>(reinterpret_cast<const void*>(&_t1)), const_cast<void*>(reinterpret_cast<const void*>(&_t2)) };
     QMetaObject::activate(this, &staticMetaObject, 1, _a);
 }
-static const uint qt_meta_data_Tthread[] = {
+static const uint qt_meta_data_objectsController[] = {
 
  // content:
        6,       // revision
        0,       // classname
        0,    0, // classinfo
-       0,    0, // methods
+       2,   14, // methods
        0,    0, // properties
        0,    0, // enums/sets
        0,    0, // constructors
        0,       // flags
        0,       // signalCount
 
+ // slots: signature, parameters, type, tag, flags
+      19,   18,   18,   18, 0x0a,
+      32,   18,   18,   18, 0x0a,
+
        0        // eod
 };
 
-static const char qt_meta_stringdata_Tthread[] = {
-    "Tthread\0"
+static const char qt_meta_stringdata_objectsController[] = {
+    "objectsController\0\0updateObjs()\0print()\0"
 };
 
-void Tthread::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
+void objectsController::qt_static_metacall(QObject *_o, QMetaObject::Call _c, int _id, void **_a)
 {
-    Q_UNUSED(_o);
-    Q_UNUSED(_id);
-    Q_UNUSED(_c);
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        Q_ASSERT(staticMetaObject.cast(_o));
+        objectsController *_t = static_cast<objectsController *>(_o);
+        switch (_id) {
+        case 0: _t->updateObjs(); break;
+        case 1: _t->print(); break;
+        default: ;
+        }
+    }
     Q_UNUSED(_a);
 }
 
-const QMetaObjectExtraData Tthread::staticMetaObjectExtraData = {
+const QMetaObjectExtraData objectsController::staticMetaObjectExtraData = {
     0,  qt_static_metacall 
 };
 
-const QMetaObject Tthread::staticMetaObject = {
-    { &QThread::staticMetaObject, qt_meta_stringdata_Tthread,
-      qt_meta_data_Tthread, &staticMetaObjectExtraData }
+const QMetaObject objectsController::staticMetaObject = {
+    { &QObject::staticMetaObject, qt_meta_stringdata_objectsController,
+      qt_meta_data_objectsController, &staticMetaObjectExtraData }
 };
 
 #ifdef Q_NO_DATA_RELOCATION
-const QMetaObject &Tthread::getStaticMetaObject() { return staticMetaObject; }
+const QMetaObject &objectsController::getStaticMetaObject() { return staticMetaObject; }
 #endif //Q_NO_DATA_RELOCATION
 
-const QMetaObject *Tthread::metaObject() const
+const QMetaObject *objectsController::metaObject() const
 {
     return QObject::d_ptr->metaObject ? QObject::d_ptr->metaObject : &staticMetaObject;
 }
 
-void *Tthread::qt_metacast(const char *_clname)
+void *objectsController::qt_metacast(const char *_clname)
 {
     if (!_clname) return 0;
-    if (!strcmp(_clname, qt_meta_stringdata_Tthread))
-        return static_cast<void*>(const_cast< Tthread*>(this));
-    return QThread::qt_metacast(_clname);
+    if (!strcmp(_clname, qt_meta_stringdata_objectsController))
+        return static_cast<void*>(const_cast< objectsController*>(this));
+    return QObject::qt_metacast(_clname);
 }
 
-int Tthread::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
+int objectsController::qt_metacall(QMetaObject::Call _c, int _id, void **_a)
 {
-    _id = QThread::qt_metacall(_c, _id, _a);
+    _id = QObject::qt_metacall(_c, _id, _a);
     if (_id < 0)
         return _id;
+    if (_c == QMetaObject::InvokeMetaMethod) {
+        if (_id < 2)
+            qt_static_metacall(this, _c, _id, _a);
+        _id -= 2;
+    }
     return _id;
 }
 QT_END_MOC_NAMESPACE
