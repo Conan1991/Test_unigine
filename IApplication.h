@@ -7,6 +7,7 @@
 class IApplication : public QApplication
 {
 public:
+
     IApplication(int& argc, char ** argv) 
         : QApplication(argc, argv)
     {
@@ -18,7 +19,10 @@ public:
 
     void init()
     {
+        countQapp = 0;
         this->installEventFilter(this);
     }
+protected:
+    int countQapp;
 };
 

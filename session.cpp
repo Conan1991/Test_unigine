@@ -5,9 +5,8 @@
 #include <UnigineGame.h>
 #include <UnigineMathLib.h>
 #include <QtCore/qcoreapplication.h>
-#include "QtCore/qlist.h"
+#include <algorithm>
 
-//QVector<Unigine::ObjectMeshDynamicPtr> Controller::objectsNew;
 #define UnigineObjects objectsController::instance()->getObjects()
 
 
@@ -54,13 +53,15 @@ void session::turn_on()
 /**************/
 objectsController::objectsController(void)
 {
-   create_objects();
+   count = 0;
+   
    //objectsNew[0]->getNode()->setEnabled(0);
    //objectsNew[1]->getNode()->setEnabled(0);
    updateTimer = new QTimer;
-   updateTimer->setInterval(10);
+   create_objects();
+  
    connect(updateTimer, SIGNAL(timeout()), this, SLOT(updateObjs()));
-   updateTimer->start();
+   updateTimer->start(10);
 }
 
 
@@ -72,24 +73,20 @@ objectsController::~objectsController(void)
 
 void worker::do_work()
 {
-    
     forever{
         QEventLoop loop;
-        QTimer::singleShot(2000, &loop, SLOT(quit()));
+        QTimer::singleShot(3000, &loop, SLOT(quit()));
         loop.exec();
-       /* if(!UnigineObjects.isEmpty() )
-        UnigineObjects.erase(UnigineObjects.begin() );*/
-        objectsController::instance()->eraseObjects();
-        /*if(UnigineObjects.isEmpty() )
-            objectsController::instance()->create_objects();*/
-       //if(!objectsController::instance()->isEnabledObjects() )
+
+        //objectsController::instance()->eraseObjects();
+
+        //if(!objectsController::instance()->isEnabledObjects() )
         //{
-            objectsTurnOffEvent *_event = new objectsTurnOffEvent;
-            QCoreApplication::postEvent(qApp, _event);
-       // }
+         objectsTurnOffEvent *_event = new objectsTurnOffEvent;
+         QCoreApplication::postEvent(qApp, _event);
+        //}
         qDebug() << "Qthread working"<<  QThread::currentThread() << endl; 
     }   
-
 }
 
 void worker::do_enable_object(int numObj, int isEnabled)
@@ -121,12 +118,19 @@ void worker::update_object()
 
 
 void objectsController::create_objects()
-{
+{  
+    
     objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(-16.0f,  0.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3( 16.0f,  0.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  0.0f,-16.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  0.0f, 16.0f,0.0f))));
-    //objectsNew.erase(objectsNew.begin());
+    count++;
+    setter.whitchObjGetOff.clear();
+    setter.whitchObjGetOff.resize(objectsNew.size());
+    setter.whitchObjGetOff.fill(1);
+    setter.pos = 0;
+    setter.mode = true;
+    qDebug() << "objects created in " << QThread::currentThread() <<"_count is " << count;
 }
 
 
@@ -148,19 +152,58 @@ void objectsController::print()
     qDebug()<< "fgfdfg"<< endl;
 }
 
-void objectsController::enable_objects()
+bool objectsController::CheckAllZero()
 {
     for(int i = 0; i < objectsNew.size(); i++) {
-        if(objectsNew[i]->getNode()->isEnabled() )
-			objectsNew[i]->getNode()->setEnabled(0);
-        else
-            objectsNew[i]->getNode()->setEnabled(1);
-	}
-    
+        if(setter.whitchObjGetOff[i] != 0)
+            return false;
+        return true;
+    }
+}
+
+
+bool objectsController::CheckNonZero()
+{
+    for(int i = 0; i < objectsNew.size(); i++) {
+        if(setter.whitchObjGetOff[i] != 1)
+            return false;
+        return true;
+    }
+}
+
+void objectsController::enable_objects()
+{
+    //QMutexLocker locker(&mutex);
+    qDebug() << setter.whitchObjGetOff.isEmpty() << setter.whitchObjGetOff.toStdVector().at(0);
+    qDebug() << "thread trying enable objects: "<<  QThread::currentThread() << endl; 
+
+    if (CheckAllZero()  )
+        setter.mode = false;
+
+
+    if(CheckNonZero()  )
+        setter.mode = true;
+
+    if(setter.pos > objectsNew.size() - 1 )
+        setter.pos = 0;
+
+    if(setter.whitchObjGetOff[setter.pos] == 1  && setter.mode == true)
+    {
+        objectsNew[setter.pos]->getNode()->setEnabled(0);
+        setter.whitchObjGetOff[setter.pos] = 0;
+    }
+    if (setter.mode == false  && setter.whitchObjGetOff[setter.pos] == 0)
+    {
+        objectsNew[setter.pos]->getNode()->setEnabled(1);
+        setter.whitchObjGetOff[setter.pos] = 1;
+    }
+    setter.pos++;
+
 }
 
 void objectsController::eraseObjects()
 {
+    //QMutexLocker locker(&mutex);
     if(!objectsNew.isEmpty() )
         objectsNew.erase(objectsNew.begin());
     else 
@@ -169,6 +212,7 @@ void objectsController::eraseObjects()
 
 bool objectsController::isEnabledObjects()
 {
+    //QMutexLocker locker(&mutex);
     if(objectsNew.isEmpty())
         return true;
 
@@ -186,8 +230,9 @@ Unigine::ObjectMeshDynamicPtr objectsController::create_object(const UNIGINE_MAT
 	for(int i = 0; i < object->getNumSurfaces(); i++) {
 		object->setMaterial("mesh_base",i);
 		object->setProperty("surface_base",i);
+       
 	}
-	
+	 //object->setVertex(object->getNumVertex() , Unigine::vec3(2,2,2));
 	return object;
 }
 
@@ -211,7 +256,7 @@ void objectsController::update_object(Unigine::ObjectMeshDynamicPtr object,float
 		float x = sinf(angle);
 		float y = cosf(angle);
 		object->addVertex(Unigine::vec3(y * radius,x * radius,(radius - 8.0f) * 0.5f));
-		object->addTexCoord(Unigine::vec4(x,y,0.0f,0.0f));
+		object->addTexCoord(Unigine::vec4(x*x,y*y,0.0f,0.0f));
 	}
 	
 	object->updateBounds();

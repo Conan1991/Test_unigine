@@ -1,14 +1,14 @@
-﻿Построение начато 27.04.2018 11:52:24.
+﻿Построение начато 28.04.2018 14:30:28.
      1>Проект "C:\Users\v.e.doronin\Documents\Myproject\Test_unigine\Test_unigine\Test_unigine.vcxproj" в узле 2 (целевые объекты build).
      1>InitializeBuildStatus:
          Создание "x64\Debug\Test_unigine.unsuccessfulbuild", так как было задано "AlwaysCreate".
        CustomBuild:
          Для всех выходных данных обновления не требуется.
        ClCompile:
-         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /Ic:\Users\v.e.doronin\QT\x64\include /I.\GeneratedFiles\Debug /Ic:\Users\v.e.doronin\QT\x64\QtCore /Ic:\Users\v.e.doronin\QT\x64\include\QtGui /I"c:\Program Files\Microsoft SDKs\Windows\v7.0\Include\\" /Ic:\Users\v.e.doronin\Documents\Myproject\Visualizator_lib\librares\Unigine_07.07.14\include\ /Zi /nologo /W1 /WX- /Od /D UNICODE /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D UNIGINE_DOUBLE /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt IApplication.cpp session.cpp
-         IApplication.cpp
+         C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\CL.exe /c /I.\GeneratedFiles /I. /Ic:\Users\v.e.doronin\QT\x64\include /I.\GeneratedFiles\Debug /Ic:\Users\v.e.doronin\QT\x64\QtCore /Ic:\Users\v.e.doronin\QT\x64\include\QtGui /I"c:\Program Files\Microsoft SDKs\Windows\v7.0\Include\\" /Ic:\Users\v.e.doronin\Documents\Myproject\Visualizator_lib\librares\Unigine_07.07.14\include\ /Zi /nologo /W1 /WX- /Od /D UNICODE /D QT_DLL /D QT_CORE_LIB /D QT_GUI_LIB /D UNIGINE_DOUBLE /Gm- /EHsc /MDd /GS /fp:precise /Zc:wchar_t- /Zc:forScope /Fo"x64\Debug\\" /Fd"x64\Debug\vc100.pdb" /Gd /TP /errorReport:prompt session.cpp
          session.cpp
-         Generating Code...
+     1>c:\users\v.e.doronin\documents\myproject\test_unigine\test_unigine\session.cpp(162): warning C4715: objectsController::CheckAllZero: значение возвращается не при всех путях выполнения
+     1>c:\users\v.e.doronin\documents\myproject\test_unigine\test_unigine\session.cpp(172): warning C4715: objectsController::CheckNonZero: значение возвращается не при всех путях выполнения
          Для всех выходных данных обновления не требуется.
        Link:
          C:\Program Files (x86)\Microsoft Visual Studio 10.0\VC\bin\x86_amd64\link.exe /ERRORREPORT:PROMPT /OUT:"C:\Users\v.e.doronin\Documents\Myproject\Test_unigine\x64\Debug\\Test_unigine.exe" /NOLOGO /LIBPATH:C:\Users\v.e.doronin\QT\x64\lib qtmaind.lib QtCored4.lib QtGuid4.lib c:\Users\v.e.doronin\Documents\Myproject\Visualizator_lib\librares\Unigine_07.07.14\lib\Unigine_x64d.lib opengl32.lib glu32.lib kernel32.lib user32.lib gdi32.lib winspool.lib shell32.lib ole32.lib oleaut32.lib uuid.lib comdlg32.lib advapi32.lib kernel32.lib user32.lib gdi32.lib winspool.lib comdlg32.lib advapi32.lib shell32.lib ole32.lib oleaut32.lib uuid.lib odbc32.lib odbccp32.lib /MANIFEST /ManifestFile:"x64\Debug\Test_unigine.exe.intermediate.manifest" /MANIFESTUAC:"level='asInvoker' uiAccess='false'" /DEBUG /PDB:"C:\Users\v.e.doronin\Documents\Myproject\Test_unigine\x64\Debug\Test_unigine.pdb" /SUBSYSTEM:WINDOWS /TLBID:1 /DYNAMICBASE /NXCOMPAT /IMPLIB:"C:\Users\v.e.doronin\Documents\Myproject\Test_unigine\x64\Debug\Test_unigine.lib" /MACHINE:X64 x64\Debug\AppQt.obj
@@ -36,4 +36,4 @@
 
 Построение успешно завершено.
 
-Затраченное время: 00:00:01.84
+Затраченное время: 00:00:01.37

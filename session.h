@@ -10,6 +10,7 @@
 #include <QtCore/qvector.h>
 #include <QtCore/QTimer>
 #include <QMouseEvent>
+
 #include "singleton.h"
 
 class session : public QObject
@@ -36,6 +37,13 @@ public:
     Q_SLOT void update_object();
 };
 
+struct stateSetter
+{
+    QVector<int> whitchObjGetOff;
+    bool mode;
+    int pos;
+
+};
 
 
 class objectsController: public QObject
@@ -55,11 +63,9 @@ public:
     QList<Unigine::ObjectMeshDynamicPtr> objectsNew;
 
     QTimer *updateTimer;
-    QList<Unigine::ObjectMeshDynamicPtr> getObjects()
-    {
-        //QMutexLocker locker(&mutex);
-        return objectsNew;
-    }
+    bool CheckAllZero();
+    bool CheckNonZero();
+
     void eraseObjects();
     bool isEnabledObjects();
 
@@ -69,8 +75,13 @@ public:
     { return Singleton<objectsController>::instance(); }
 private:
     QMutex mutex;
+    int count;
+    stateSetter setter;
 
 };
+
+
+
 
 
 class objectsTurnOffEvent: public QEvent

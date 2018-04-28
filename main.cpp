@@ -45,6 +45,7 @@ int main(int argc, char *argv[])
 	// initialize Engine
 	Unigine::Engine::init(UNIGINE_VERSION,&widget,argc,argv);
     app.init();
+
     objectsController::instance();
     //new Objects();
     //Thread *thread = new Thread();
