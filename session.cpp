@@ -119,12 +119,15 @@ void worker::update_object()
 
 void objectsController::create_objects()
 {  
-    
-    objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(-16.0f,  0.0f,0.0f))));
+    for(int OffsetX = 0 ; OffsetX < 20; OffsetX++ )
+        for(int OffsetY = 0 ; OffsetY < 20; OffsetY++ )
+            objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3( OffsetX,  OffsetY,0.0f))));
+
+    /*objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(-16.0f,  0.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3( 16.0f,  0.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  0.0f,-16.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  0.0f, 16.0f,0.0f))));
-    objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  20.0f, 16.0f,0.0f))));
+    objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  18.0f, 0.0f,0.0f))));*/
     count++;
     setter.whitchObjGetOff.clear();
     setter.whitchObjGetOff.resize(objectsNew.size());
@@ -156,21 +159,21 @@ void objectsController::print()
 
 bool objectsController::CheckAllZero()
 {
-    for(int i = 0; i < objectsNew.size(); i++) {
+    for(int i = 0; i < objectsNew.size(); i++)
         if(setter.whitchObjGetOff[i] != 0)
             return false;
         return true;
-    }
+  
 }
 
 
 bool objectsController::CheckNonZero()
 {
-    for(int i = 0; i < objectsNew.size(); i++) {
+    for(int i = 0; i < objectsNew.size(); i++)
         if(setter.whitchObjGetOff[i] != 1)
             return false;
         return true;
-    }
+
 }
 
 void objectsController::enable_objects()
@@ -227,10 +230,11 @@ Unigine::ObjectMeshDynamicPtr objectsController::create_object(const UNIGINE_MAT
 	
 	Unigine::ObjectMeshDynamicPtr object = Unigine::ObjectMeshDynamic::create(1);
 	//object->setWorldTransform(transform);
-    Unigine::dvec3 vec =  transform.getColumn3(3);
-    UNIGINE_MAT4 matrix = transform;
-	matrix.setScale(UNIGINE_VEC3(  0.1f,0.1f,0.1f));
+    Unigine::dvec3 TranslateVec =  transform.getColumn3(3);
+    UNIGINE_MAT4 matrix = transform * Unigine::scale(UNIGINE_VEC3(  0.05f,0.05f,0.05f));
+	//matrix.setScale(UNIGINE_VEC3(  0.1f,0.1f,0.1f));
     //matrix.setColumn3(3, vec);
+
     object->setWorldTransform(matrix);
 	for(int i = 0; i < object->getNumSurfaces(); i++) {
 		object->setMaterial("mesh_base",i);
