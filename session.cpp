@@ -124,6 +124,7 @@ void objectsController::create_objects()
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3( 16.0f,  0.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  0.0f,-16.0f,0.0f))));
 	objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  0.0f, 16.0f,0.0f))));
+    objectsNew.append(create_object(Unigine::translate(UNIGINE_VEC3(  20.0f, 16.0f,0.0f))));
     count++;
     setter.whitchObjGetOff.clear();
     setter.whitchObjGetOff.resize(objectsNew.size());
@@ -131,6 +132,7 @@ void objectsController::create_objects()
     setter.pos = 0;
     setter.mode = true;
     qDebug() << "objects created in " << QThread::currentThread() <<"_count is " << count;
+    //objectsNew[0]->getObject().get
 }
 
 
@@ -180,7 +182,6 @@ void objectsController::enable_objects()
     if (CheckAllZero()  )
         setter.mode = false;
 
-
     if(CheckNonZero()  )
         setter.mode = true;
 
@@ -225,8 +226,12 @@ bool objectsController::isEnabledObjects()
 Unigine::ObjectMeshDynamicPtr objectsController::create_object(const UNIGINE_MAT4 &transform) {
 	
 	Unigine::ObjectMeshDynamicPtr object = Unigine::ObjectMeshDynamic::create(1);
-	object->setWorldTransform(transform);
-	
+	//object->setWorldTransform(transform);
+    Unigine::dvec3 vec =  transform.getColumn3(3);
+    UNIGINE_MAT4 matrix = transform;
+	matrix.setScale(UNIGINE_VEC3(  0.1f,0.1f,0.1f));
+    //matrix.setColumn3(3, vec);
+    object->setWorldTransform(matrix);
 	for(int i = 0; i < object->getNumSurfaces(); i++) {
 		object->setMaterial("mesh_base",i);
 		object->setProperty("surface_base",i);
